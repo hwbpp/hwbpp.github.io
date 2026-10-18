@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NotaryFlow · Hugo Wahyu Bagas Putra Pratama</title>
+  <meta name="description" content="Individual project by Hugo Wahyu Bagas Putra Pratama: a case and document management web application for a notary office, built with TypeScript, Express, and SQLite.">
+  <meta name="theme-color" content="#0b1220">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Hugo Wahyu Bagas Putra Pratama">
+  <meta property="og:title" content="NotaryFlow">
+  <meta property="og:description" content="Individual project by Hugo Wahyu Bagas Putra Pratama: a case and document management web application for a notary office, built with TypeScript, Express, and SQLite.">
+  <!-- TODO: og:url and og:image once the domain and a preview image exist -->
+  <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap">
+  <link rel="stylesheet" href="../assets/css/main.css">
+  <script>(function(d){d.classList.add("js-nav");if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.classList.add("js-motion");})(document.documentElement);</script>
+  <script src="../assets/js/main.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap nav-bar">
+      <!-- TODO: Hugo to confirm the header short form "Hugo W. B. P. Pratama" -->
+      <a class="wordmark" href="../index.html">Hugo W. B. P. Pratama</a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-menu">
+        <span class="visually-hidden">Menu</span><span class="bar"></span><span class="bar"></span><span class="bar"></span>
+      </button>
+      <nav id="site-menu" class="site-nav" aria-label="Primary">
+        <ul>
+          <li><a href="../index.html#projects">Projects</a></li>
+          <li><a href="../index.html#experience">Experience</a></li>
+          <li><a href="../about.html">About</a></li>
+          <li><a href="../index.html#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="wrap">
+      <header class="page-head">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <ol>
+            <li><a href="../index.html#projects">Projects</a></li>
+            <li aria-current="page">NotaryFlow</li>
+          </ol>
+        </nav>
+        <p class="eyebrow">Software · individual project</p>
+        <h1>NotaryFlow</h1>
+        <p class="lead">A case and document management web application for a notary office: one place to record casework, assign tasks to employees, and keep documentation together.</p>
+        <dl class="meta-strip card">
+          <div><dt>Status</dt><dd><span class="status status--done">Completed</span></dd></div>
+          <div><dt>Type</dt><dd>Internal web application</dd></div>
+          <div><dt>Work mode</dt><dd>Individual</dd></div>
+          <div><dt>Stack</dt><dd>TypeScript, Express, SQLite</dd></div>
+        </dl>
+        <figure class="case-visual-wrap">
+          <div class="case-visual frame frame--shot frame--natural frame--large">
+            <div class="frame-bar" aria-hidden="true"><i></i><i></i><i></i><span>notaryflow · dashboard</span></div>
+            <img src="../assets/images/notaryflow-dashboard.jpg" width="1600" height="1000" alt="Notary dashboard in Indonesian with five summary tiles: active cases, overdue, due today, waiting for notary review, and urgent. Below them, a list of cases that need attention, each with a case number, title, client, assigned staff member, status, and deadline.">
+          </div>
+          <figcaption class="case-visual-caption">Operational dashboard. Screenshots use fictional demo records only.</figcaption>
+        </figure>
+      </header>
+
+      <article class="case" aria-label="Case study">
+        <section class="case-section" aria-labelledby="problem" data-reveal>
+          <h2 id="problem"><span>01</span>Problem</h2>
+          <p>Staff at a notary office needed one system to record casework, assign tasks to employees, and keep documentation in one place.</p>
+        </section>
+
+        <section class="case-section" aria-labelledby="data" data-reveal>
+          <h2 id="data"><span>02</span>Data / Context</h2>
+          <p>All data comes from the office's own input: clients, cases, tasks, uploaded documents, and templates. It is stored in a relational SQLite database of 14 tables, with separate tables for document and template versions and an activity log of who changed what.</p>
+        </section>
+
+        <section class="case-section" aria-labelledby="approach" data-reveal>
+          <h2 id="approach"><span>03</span>Approach</h2>
+          <ul>
+            <li><strong>Case workflow:</strong> New → In Progress → Waiting for Notary Review → Completed, with every status change validated on the server.</li>
+            <li><strong>Roles:</strong> separate notary and employee access; employees see only the cases assigned to them.</li>
+            <li><strong>Documents:</strong> uploads are checked by file content, not only by extension, and every earlier version stays available.</li>
+            <li><strong>Checklists and templates:</strong> each case type can carry a requirement checklist, copied into new cases automatically.</li>
+            <li><strong>Operational dashboard:</strong> SQL aggregates for active, overdue, due-today, review-queue, and urgent cases, plus employee workload.</li>
+            <li><strong>Safe data handling:</strong> backup and restore with file hashes and database integrity checks.</li>
+          </ul>
+          <figure class="case-figure">
+            <div class="frame frame--shot frame--natural">
+              <div class="frame-bar" aria-hidden="true"><i></i><i></i><i></i><span>notaryflow · case detail</span></div>
+              <img src="../assets/images/notaryflow-case-checklist.jpg" width="1600" height="1000" loading="lazy" alt="Case detail page in Indonesian for a fictional demo case waiting for notary review. It shows actions to upload documents or return the case to progress, a requirement checklist with three of five items complete, and a case summary with client, case type, status, and priority.">
+            </div>
+            <figcaption>Case detail with the requirement checklist. Fictional demo records.</figcaption>
+          </figure>
+        </section>
+
+        <section class="case-section" aria-labelledby="tools" data-reveal>
+          <h2 id="tools"><span>04</span>Tools</h2>
+          <dl class="tool-list">
+            <div><dt>TypeScript, Node.js</dt><dd>Application code</dd></div>
+            <div><dt>Express, EJS</dt><dd>Server-rendered pages and routes</dd></div>
+            <div><dt>SQLite, SQL</dt><dd>14-table schema with hand-written queries and aggregates</dd></div>
+            <div><dt>bcrypt, Helmet</dt><dd>Password hashing and security headers</dd></div>
+            <div><dt>Vitest, Supertest</dt><dd>Automated tests for workflow, access, and documents</dd></div>
+          </dl>
+        </section>
+        <!-- Result section omitted: no measured outcome yet -->
+        <!-- TODO: result (e.g. what changed for the office), only if Hugo can state it without implying deployment or daily use -->
+
+        <section class="case-section" aria-labelledby="role" data-reveal>
+          <h2 id="role"><span>05</span>My Role</h2>
+          <p>Individual project: designed, built, and tested by Hugo.</p>
+        </section>
+        <!-- Links section omitted: no public repository -->
+      </article>
+
+      <nav class="pager" aria-label="More case studies">
+        <a class="prev card" href="crypto-market-analyzer.html"><small>Previous case study</small>Crypto Market Analyzer</a>
+        <a class="next card" href="pantera.html"><small>Next case study</small>PANTERA</a>
+      </nav>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>© 2026 Hugo Wahyu Bagas Putra Pratama</p>
+      <ul>
+        <li><a href="../index.html#projects">Projects</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../index.html#contact">Contact</a></li>
+        <li><a href="mailto:hugobagas0104@gmail.com">Email</a></li>
+        <li><a href="https://www.linkedin.com/in/hugo-wahyu-bagas-putra-p-716778326" target="_blank" rel="noopener noreferrer">LinkedIn<span class="visually-hidden"> (opens in a new tab)</span></a></li>
+      </ul>
+    </div>
+  </footer>
+</body>
+</html>

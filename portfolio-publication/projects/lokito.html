@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lokito · Hugo Wahyu Bagas Putra Pratama</title>
+  <meta name="description" content="Venture Creation project with Hugo Wahyu Bagas Putra Pratama as CTO: a Jakarta public-facility finder built on a real OpenStreetMap snapshot with Python and Streamlit.">
+  <meta name="theme-color" content="#0b1220">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Hugo Wahyu Bagas Putra Pratama">
+  <meta property="og:title" content="Lokito">
+  <meta property="og:description" content="Venture Creation project with Hugo Wahyu Bagas Putra Pratama as CTO: a Jakarta public-facility finder built on a real OpenStreetMap snapshot with Python and Streamlit.">
+  <!-- TODO: og:url and og:image once the domain and a preview image exist -->
+  <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap">
+  <link rel="stylesheet" href="../assets/css/main.css">
+  <script>(function(d){d.classList.add("js-nav");if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.classList.add("js-motion");})(document.documentElement);</script>
+  <script src="../assets/js/main.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap nav-bar">
+      <!-- TODO: Hugo to confirm the header short form "Hugo W. B. P. Pratama" -->
+      <a class="wordmark" href="../index.html">Hugo W. B. P. Pratama</a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-menu">
+        <span class="visually-hidden">Menu</span><span class="bar"></span><span class="bar"></span><span class="bar"></span>
+      </button>
+      <nav id="site-menu" class="site-nav" aria-label="Primary">
+        <ul>
+          <li><a href="../index.html#projects">Projects</a></li>
+          <li><a href="../index.html#experience">Experience</a></li>
+          <li><a href="../about.html">About</a></li>
+          <li><a href="../index.html#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="wrap">
+      <header class="page-head">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <ol>
+            <li><a href="../index.html#projects">Projects</a></li>
+            <li aria-current="page">Lokito</li>
+          </ol>
+        </nav>
+        <p class="eyebrow">Software · Venture Creation course</p>
+        <h1>Lokito</h1>
+        <p class="lead">A public-facility finder for Jakarta, built on a real OpenStreetMap snapshot. It starts with the nearest mapped toilet, shows what is known about it, and hands off to map directions.</p>
+        <dl class="meta-strip card">
+          <div><dt>Status</dt><dd><span class="status status--dev">In development</span></dd></div>
+          <div><dt>Type</dt><dd>Venture Creation course</dd></div>
+          <div><dt>Team</dt><dd>5 people · Hugo as CTO</dd></div>
+          <div><dt>Stack</dt><dd>Python, Streamlit, pandas, SQLite</dd></div>
+        </dl>
+        <figure class="case-visual-wrap">
+          <div class="case-visual frame frame--shot frame--natural frame--large">
+            <div class="frame-bar" aria-hidden="true"><i></i><i></i><i></i><span>lokito · find a toilet nearby</span></div>
+            <img src="../assets/images/lokito-map-discovery.jpg" width="1280" height="800" alt="Lokito home screen titled “Find a toilet nearby.” On the left, the starting point, preference and facility filters, a count of 43 toilets within 5 km, and a card for the nearest option with its distance, location context, and an Open directions button. On the right, an OpenStreetMap map of central Jakarta with numbered toilet clusters and venue markers.">
+          </div>
+          <figcaption class="case-visual-caption">Discovery view with real OpenStreetMap data. Map © OpenStreetMap contributors.</figcaption>
+        </figure>
+      </header>
+
+      <article class="case" aria-label="Case study">
+        <section class="case-section" aria-labelledby="problem" data-reveal>
+          <h2 id="problem"><span>01</span>Problem</h2>
+          <p>People can find a mall or station on a map but still have to work out whether it has the facility they need. Lokito starts from the need, a nearby toilet, with prayer spaces and drinking water as secondary options.</p>
+        </section>
+
+        <section class="case-section" aria-labelledby="data" data-reveal>
+          <h2 id="data"><span>02</span>Data / Context</h2>
+          <p>A snapshot of the Jakarta administrative area downloaded from OpenStreetMap on 14 September 2026.</p>
+          <ul class="stat-row" aria-label="Snapshot profile">
+            <li><strong>5,824</strong><span>mapped objects: 141 toilets, 5,645 places of worship, 38 drinking-water points</span></li>
+            <li><strong>92.6%</strong><span>of records have a name</span></li>
+            <li><strong>&lt; 1%</strong><span>have access, opening-hours, wheelchair, or fee details</span></li>
+          </ul>
+          <p>The data-quality audit showed that locations are well covered but practical details are mostly missing, so the app shows unknowns openly instead of guessing.</p>
+        </section>
+
+        <section class="case-section" aria-labelledby="approach" data-reveal>
+          <h2 id="approach"><span>03</span>Approach</h2>
+          <ol class="flow" aria-label="Data pipeline">
+            <li><strong>Overpass API</strong><span>OpenStreetMap query</span></li>
+            <li><strong>Raw snapshot</strong><span>Kept unchanged</span></li>
+            <li><strong>Normalize and audit</strong><span>pandas, completeness</span></li>
+            <li><strong>Streamlit app</strong><span>Map, list, details</span></li>
+          </ol>
+          <p class="flow-caption">Raw data stays separate from the normalized records the app uses.</p>
+          <ul>
+            <li><strong>Nearest first:</strong> facilities ranked by straight-line distance from a starting point, with filters for radius, wheelchair access, fee, access, and religion.</li>
+            <li><strong>Venue context:</strong> 1,170 facilities matched to nearby malls, stations, and fuel stations by location.</li>
+            <li><strong>Trust view:</strong> a "Data &amp; trust" page shows sources, coverage gaps, and timestamps; visitor observations are held as pending review.</li>
+          </ul>
+        </section>
+
+        <section class="case-section" aria-labelledby="tools" data-reveal>
+          <h2 id="tools"><span>04</span>Tools</h2>
+          <dl class="tool-list">
+            <div><dt>Python, pandas</dt><dd>Ingestion, normalization, and the data-quality audit</dd></div>
+            <div><dt>Jupyter</dt><dd>Data exploration notebook</dd></div>
+            <div><dt>Streamlit, Folium</dt><dd>Web app and interactive OpenStreetMap map</dd></div>
+            <div><dt>SQLite</dt><dd>Visitor observations and feedback</dd></div>
+            <div><dt>Overpass, Wikimedia APIs</dt><dd>Facility data and licensed venue photos</dd></div>
+            <div><dt>pytest</dt><dd>Automated tests</dd></div>
+          </dl>
+        </section>
+
+        <section class="case-section" aria-labelledby="result" data-reveal>
+          <h2 id="result"><span>05</span>Current progress</h2>
+          <p>A working MVP with a public live demo on Streamlit Community Cloud. User demand and the business model are hypotheses still to be tested.</p>
+        </section>
+
+        <section class="case-section" aria-labelledby="role" data-reveal>
+          <h2 id="role"><span>06</span>My Role</h2>
+          <p>Team of five. As CTO, Hugo built the web platform end to end: design, data exploration, data consumption, and the application.</p>
+        </section>
+        <section class="case-section" aria-labelledby="links" data-reveal>
+          <h2 id="links"><span>07</span>Links</h2>
+          <ul class="actions">
+            <li><a class="button button--primary" href="https://lokito-7vtrjdbjsvskhije3g5xhd.streamlit.app" target="_blank" rel="noopener noreferrer">Open live demo <span aria-hidden="true">↗</span><span class="visually-hidden"> (opens in a new tab)</span></a></li>
+          </ul>
+          <!-- Repository link hidden: the current repository belongs to a teammate -->
+          <!-- TODO: link to Hugo's own Lokito repository once it exists -->
+        </section>
+      </article>
+
+      <nav class="pager" aria-label="More case studies">
+        <a class="prev card" href="pantera.html"><small>Previous case study</small>PANTERA</a>
+      </nav>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>© 2026 Hugo Wahyu Bagas Putra Pratama</p>
+      <ul>
+        <li><a href="../index.html#projects">Projects</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../index.html#contact">Contact</a></li>
+        <li><a href="mailto:hugobagas0104@gmail.com">Email</a></li>
+        <li><a href="https://www.linkedin.com/in/hugo-wahyu-bagas-putra-p-716778326" target="_blank" rel="noopener noreferrer">LinkedIn<span class="visually-hidden"> (opens in a new tab)</span></a></li>
+      </ul>
+    </div>
+  </footer>
+</body>
+</html>

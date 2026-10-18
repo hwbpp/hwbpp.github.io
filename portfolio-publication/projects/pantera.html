@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PANTERA · Hugo Wahyu Bagas Putra Pratama</title>
+  <meta name="description" content="Course project completed by Hugo Wahyu Bagas Putra Pratama: a food-retail operations app with a backtested demand forecast and a waste-risk model, built on synthetic data.">
+  <meta name="theme-color" content="#0b1220">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Hugo Wahyu Bagas Putra Pratama">
+  <meta property="og:title" content="PANTERA">
+  <meta property="og:description" content="Course project completed by Hugo Wahyu Bagas Putra Pratama: a food-retail operations app with a backtested demand forecast and a waste-risk model, built on synthetic data.">
+  <!-- TODO: og:url and og:image once the domain and a preview image exist -->
+  <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap">
+  <link rel="stylesheet" href="../assets/css/main.css">
+  <script>(function(d){d.classList.add("js-nav");if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.classList.add("js-motion");})(document.documentElement);</script>
+  <script src="../assets/js/main.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap nav-bar">
+      <!-- TODO: Hugo to confirm the header short form "Hugo W. B. P. Pratama" -->
+      <a class="wordmark" href="../index.html">Hugo W. B. P. Pratama</a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-menu">
+        <span class="visually-hidden">Menu</span><span class="bar"></span><span class="bar"></span><span class="bar"></span>
+      </button>
+      <nav id="site-menu" class="site-nav" aria-label="Primary">
+        <ul>
+          <li><a href="../index.html#projects">Projects</a></li>
+          <li><a href="../index.html#experience">Experience</a></li>
+          <li><a href="../about.html">About</a></li>
+          <li><a href="../index.html#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="wrap">
+      <header class="page-head">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <ol>
+            <li><a href="../index.html#projects">Projects</a></li>
+            <li aria-current="page">PANTERA</li>
+          </ol>
+        </nav>
+        <p class="eyebrow">Software · Artificial Intelligence course</p>
+        <h1>PANTERA</h1>
+        <p class="lead">A retail operations application that helps small food retailers reduce waste from expiring stock, with a demand forecast and a waste-risk model chosen by backtesting. Built on synthetic data.</p>
+        <dl class="meta-strip card">
+          <div><dt>Status</dt><dd><span class="status status--done">Completed</span></dd></div>
+          <div><dt>Type</dt><dd>Artificial Intelligence course</dd></div>
+          <div><dt>Work mode</dt><dd>Group project</dd></div>
+          <div><dt>Stack</dt><dd>Python, FastAPI, scikit-learn, XGBoost</dd></div>
+        </dl>
+        <figure class="case-visual-wrap">
+          <div class="case-visual frame frame--shot frame--natural frame--large">
+            <div class="frame-bar" aria-hidden="true"><i></i><i></i><i></i><span>pantera · operations overview</span></div>
+            <img src="../assets/images/pantera-operations-overview.jpg" width="800" height="500" alt="PANTERA operations overview with six summary tiles (sellable stock, near-expiry stock, expired stock, predicted waste, expected demand for the next seven days, and actions due), a table of critical inventory alerts by batch and expiry date, and a ranked list of priority actions with a score for each batch.">
+          </div>
+          <figcaption class="case-visual-caption">Operations overview, shown with synthetic demo data.</figcaption>
+        </figure>
+      </header>
+
+      <article class="case" aria-label="Case study">
+        <section class="case-section" aria-labelledby="problem" data-reveal>
+          <h2 id="problem"><span>01</span>Problem</h2>
+          <p>Small food retailers lose stock when batches expire before they sell. PANTERA tracks stock batch by batch, estimates which batches are likely to be wasted, and shows what to act on first.</p>
+        </section>
+
+        <section class="case-section" aria-labelledby="data" data-reveal>
+          <h2 id="data"><span>02</span>Data / Context</h2>
+          <p>Synthetic data, generated for the project: 120 days of daily sales for 3 products, and 4,000 historical inventory batches used to train and evaluate the waste-risk model.</p>
+        </section>
+
+        <section class="case-section" aria-labelledby="approach" data-reveal>
+          <h2 id="approach"><span>03</span>Approach</h2>
+          <ul>
+            <li><strong>Inventory logic:</strong> sales are taken from the batch that expires first (FEFO), validated, and written atomically so a failed sale never leaves files half-updated.</li>
+            <li><strong>Demand forecast by backtest:</strong> five methods compared with a rolling-origin backtest over 6 folds; a model only replaces the baseline if it clearly wins.</li>
+            <li><strong>Waste-risk model:</strong> an audit found data leakage in the original pipeline, so it was rebuilt with point-in-time features and a chronological train/validation split with overlapping cases removed.</li>
+            <li><strong>Operations rules:</strong> priority ranking of batches, markdown pricing by days to expiry, supplier score, bundle suggestions, and a data-quality report of invalid rows.</li>
+          </ul>
+          <figure class="case-figure">
+            <div class="frame frame--shot frame--natural">
+              <div class="frame-bar" aria-hidden="true"><i></i><i></i><i></i><span>pantera · demand outlook</span></div>
+              <img src="../assets/images/pantera-demand-outlook.jpg" width="800" height="500" loading="lazy" alt="Demand outlook with a table of forecast units per day, next-seven-day totals, trend, typical range, and a four-week sparkline for three products, above a bar chart of daily sales for one product where the last seven days, used as the forecast basis, are highlighted and the forecast level is drawn as a dashed line.">
+            </div>
+            <figcaption>Demand outlook: the forecast is the average of the last 7 days, the method that won the backtest. Synthetic data.</figcaption>
+          </figure>
+        </section>
+
+        <section class="case-section" aria-labelledby="tools" data-reveal>
+          <h2 id="tools"><span>04</span>Tools</h2>
+          <dl class="tool-list">
+            <div><dt>Python, pandas</dt><dd>Data preparation, features, and evaluation</dd></div>
+            <div><dt>scikit-learn, XGBoost</dt><dd>Model pipelines and gradient-boosted models</dd></div>
+            <div><dt>FastAPI, Jinja2</dt><dd>Web application and API endpoints</dd></div>
+            <div><dt>Chart.js, matplotlib</dt><dd>Dashboard charts and evaluation plots</dd></div>
+            <div><dt>pytest</dt><dd>Automated tests, including leakage checks</dd></div>
+          </dl>
+        </section>
+
+        <section class="case-section" aria-labelledby="result" data-reveal>
+          <h2 id="result"><span>05</span>Result</h2>
+          <ul class="stat-row" aria-label="Key results on synthetic data">
+            <li><strong>0.087</strong><span>WAPE of the selected 7-day average, vs 0.091 for XGBoost (126 product-days)</span></li>
+            <li><strong>22.16</strong><span>MAE in units for the waste-risk model, vs 32.45 for a rule-based heuristic</span></li>
+            <li><strong>2,857</strong><span>validation snapshots in a purged chronological split</span></li>
+          </ul>
+          <p>The simpler 7-day average won the demand backtest, so it is the method the application uses. The rebuilt waste-risk model beat both baselines and replaced the earlier model. All results are on synthetic data.</p>
+        </section>
+
+        <section class="case-section" aria-labelledby="role" data-reveal>
+          <h2 id="role"><span>06</span>My Role</h2>
+          <p>Group project for an Artificial Intelligence course. Two teammates became inactive during the semester, so Hugo completed the project and the application himself.</p>
+          <!-- TODO: what the group contributed before the two teammates became inactive, if worth naming -->
+        </section>
+        <!-- Links section hidden until the repository is live -->
+        <!-- TODO: GitHub link https://github.com/hwbpp/PANTERA once Hugo confirms the repo is pushed -->
+      </article>
+
+      <nav class="pager" aria-label="More case studies">
+        <a class="prev card" href="notaryflow.html"><small>Previous case study</small>NotaryFlow</a>
+        <a class="next card" href="lokito.html"><small>Next case study</small>Lokito</a>
+      </nav>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>© 2026 Hugo Wahyu Bagas Putra Pratama</p>
+      <ul>
+        <li><a href="../index.html#projects">Projects</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../index.html#contact">Contact</a></li>
+        <li><a href="mailto:hugobagas0104@gmail.com">Email</a></li>
+        <li><a href="https://www.linkedin.com/in/hugo-wahyu-bagas-putra-p-716778326" target="_blank" rel="noopener noreferrer">LinkedIn<span class="visually-hidden"> (opens in a new tab)</span></a></li>
+      </ul>
+    </div>
+  </footer>
+</body>
+</html>

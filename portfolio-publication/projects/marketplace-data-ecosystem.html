@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Marketplace Data Ecosystem · Hugo Wahyu Bagas Putra Pratama</title>
+  <meta name="description" content="Coursework case study by Hugo Wahyu Bagas Putra Pratama: a Kaggle smartphone marketplace dataset (Indonesian market) analysed in Python and Tableau and modelled through a Pentaho → MySQL → Power BI pipeline.">
+  <meta name="theme-color" content="#0b1220">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Hugo Wahyu Bagas Putra Pratama">
+  <meta property="og:title" content="Marketplace Data Ecosystem">
+  <meta property="og:description" content="Coursework case study by Hugo Wahyu Bagas Putra Pratama: a Kaggle smartphone marketplace dataset (Indonesian market) analysed in Python and Tableau and modelled through a Pentaho → MySQL → Power BI pipeline.">
+  <!-- TODO: og:url and og:image once the domain and a preview image exist -->
+  <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap">
+  <link rel="stylesheet" href="../assets/css/main.css">
+  <script>(function(d){d.classList.add("js-nav");if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.classList.add("js-motion");})(document.documentElement);</script>
+  <script src="../assets/js/main.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap nav-bar">
+      <!-- TODO: Hugo to confirm the header short form "Hugo W. B. P. Pratama" -->
+      <a class="wordmark" href="../index.html">Hugo W. B. P. Pratama</a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-menu">
+        <span class="visually-hidden">Menu</span><span class="bar"></span><span class="bar"></span><span class="bar"></span>
+      </button>
+      <nav id="site-menu" class="site-nav" aria-label="Primary">
+        <ul>
+          <li><a href="../index.html#projects">Projects</a></li>
+          <li><a href="../index.html#experience">Experience</a></li>
+          <li><a href="../about.html">About</a></li>
+          <li><a href="../index.html#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="wrap">
+      <header class="page-head">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <ol>
+            <li><a href="../index.html#projects">Projects</a></li>
+            <li aria-current="page">Marketplace Data Ecosystem</li>
+          </ol>
+        </nav>
+        <p class="eyebrow">Data &amp; analytics case study</p>
+        <h1>Marketplace Data Ecosystem</h1>
+        <p class="lead">One Kaggle smartphone marketplace dataset for the Indonesian market, carried through three courses: Data Engineering, Data Analytics, and Data Visualization.</p>
+        <dl class="meta-strip card">
+          <div><dt>Status</dt><dd><span class="status status--done">Completed</span></dd></div>
+          <div><dt>Type</dt><dd>Coursework, three courses</dd></div>
+          <div><dt>Work mode</dt><dd>Individual and group</dd></div>
+          <div><dt>Tools</dt><dd>Pentaho, MySQL, Power BI, Python, Tableau</dd></div>
+        </dl>
+        <figure class="case-visual-wrap">
+          <div class="case-visual frame frame--shot frame--natural frame--large">
+            <div class="frame-bar" aria-hidden="true"><i></i><i></i><i></i><span>tableau public · smartphone marketplace performance</span></div>
+            <img src="../assets/images/marketplace-tableau-dashboard.jpg" width="1600" height="1028" alt="Tableau dashboard titled Smartphone Marketplace Performance Dashboard. Eight KPI tiles (estimated GMV, total sold, views, listings, average rating, reviews, brands, merchants) sit above a weekly GMV trend line by merchant badge, a bar chart of the top 10 brands by GMV, a column chart of GMV by price band, and a bar chart of the top 10 products by estimated GMV, with a filter panel for week, brand, merchant badge, price band, and merchant region.">
+          </div>
+          <figcaption class="case-visual-caption">Tableau dashboard, published on Tableau Public.</figcaption>
+        </figure>
+      </header>
+
+      <article class="case" aria-label="Case study">
+        <section class="case-section" aria-labelledby="problem" data-reveal>
+          <h2 id="problem"><span>01</span>Problem</h2>
+          <p>The raw marketplace export had missing values, duplicates, inconsistent data types, and unstandardized column names, so it could not be analysed reliably as it was. The goal was to turn it into trustworthy analytical data and dashboards that show marketplace performance: GMV, sales, product views, merchant contribution, and conversion rate.</p>
+        </section>
+
+        <section class="case-section" aria-labelledby="data" data-reveal>
+          <h2 id="data"><span>02</span>Data / Context</h2>
+          <p>A Kaggle dataset of smartphone listings from an Indonesian online marketplace, delivered as CSV. It covers product, brand, price, stock, rating, reviews, sales, product views, merchant city and badge, and revenue estimates. The same dataset was used in all three courses, so each course built on the same raw data.</p>
+          <ul class="stat-row" aria-label="Scope shown in the Tableau dashboard">
+            <li><strong>12,120</strong><span>listings</span></li>
+            <li><strong>4,094</strong><span>merchants</span></li>
+            <li><strong>11</strong><span>smartphone brands</span></li>
+          </ul>
+          <!-- TODO: dataset size in rows and columns, and the year of the data -->
+        </section>
+
+        <section class="case-section" aria-labelledby="approach" data-reveal>
+          <h2 id="approach"><span>03</span>Approach</h2>
+          <p>Two tracks start from the same raw data: a group data engineering pipeline, and individual analysis in Python and Tableau.</p>
+
+          <h3 class="case-subhead">Data engineering pipeline (group)</h3>
+          <ol class="flow" aria-label="Data layers">
+            <li><strong>Raw CSV</strong><span>Kaggle export</span></li>
+            <li><strong>Staging</strong><span>Loaded as is with Pentaho</span></li>
+            <li><strong>Processed</strong><span>Cleaned and validated</span></li>
+            <li><strong>Analysis</strong><span>Star schema in MySQL</span></li>
+          </ol>
+          <p class="flow-caption">Raw data stays untouched in staging, so any step can be re-run from the original.</p>
+          <ul>
+            <li><strong>Cleaning and validation:</strong> missing values, duplicates, format fixes, type conversion, numeric checks, and standardized categories such as product type, merchant badge, and merchant city.</li>
+            <li><strong>Orchestration:</strong> one Pentaho Job runs the steps in order, and each step starts only after the previous one succeeds: data cleaning, then the product, merchant, and date dimensions, then the fact table.</li>
+            <li><strong>Power BI report:</strong> an executive page with GMV, units sold, product views, product count, and conversion rate, broken down by day, product type, merchant badge, and merchant city; and a product-level detail page with a filterable SKU table.</li>
+          </ul>
+
+          <figure class="schema" aria-labelledby="schema-caption">
+            <div class="schema-grid">
+              <div class="schema-table schema-table--dim schema-merchant">
+                <p class="schema-name">DIM_MERCHANT</p>
+                <ul><li class="is-key">merchant_code</li><li>merchant_city</li><li>merchant_badge</li></ul>
+              </div>
+              <div class="schema-table schema-table--dim schema-date">
+                <p class="schema-name">DIM_DATE</p>
+                <ul><li class="is-key">date</li><li>day</li><li>month</li><li>month_name</li><li>year</li></ul>
+              </div>
+              <div class="schema-table schema-table--fact schema-fact">
+                <p class="schema-name">FACT_SALES</p>
+                <ul><li class="is-key">sales_id</li><li class="is-fk">date</li><li class="is-fk">merchant_code</li><li class="is-fk">product_id</li><li class="is-measure">daily_gmv</li><li class="is-measure">daily_sold</li><li class="is-measure">daily_view</li></ul>
+              </div>
+              <div class="schema-table schema-table--dim schema-product">
+                <p class="schema-name">DIM_PRODUCT</p>
+                <ul><li class="is-key">product_id</li><li>product_type</li><li>sku_name</li></ul>
+              </div>
+            </div>
+            <figcaption id="schema-caption">Star schema: one fact table of daily measures with three dimension tables. Key, foreign-key, and measure columns are marked.</figcaption>
+          </figure>
+
+          <figure class="case-figure">
+            <div class="frame frame--shot frame--natural">
+              <div class="frame-bar" aria-hidden="true"><i></i><i></i><i></i><span>power bi · marketplace sales dashboard</span></div>
+              <img src="../assets/images/marketplace-powerbi-overview.jpg" width="1600" height="929" loading="lazy" alt="Power BI executive page titled Marketplace Sales Dashboard with five KPI cards (total GMV, total sold, total views, total products, conversion rate), a daily line chart of GMV and units sold, a bar chart of GMV by product type, a donut chart of GMV by merchant badge, and a bar chart of GMV by merchant city led by Jakarta Pusat.">
+            </div>
+            <figcaption>Power BI executive page.</figcaption>
+          </figure>
+          <figure class="case-figure">
+            <div class="frame frame--shot frame--natural">
+              <div class="frame-bar" aria-hidden="true"><i></i><i></i><i></i><span>power bi · table detail</span></div>
+              <img src="../assets/images/marketplace-powerbi-detail.jpg" width="1600" height="929" loading="lazy" alt="Power BI detail page with a table of smartphone SKUs showing product type, total sold, total GMV, total views, and conversion rate, sorted by units sold, next to filter lists for product type and merchant city.">
+            </div>
+            <figcaption>Power BI product-level detail page.</figcaption>
+          </figure>
+
+          <h3 class="case-subhead">Analysis and visualization (individual)</h3>
+          <ul>
+            <li><strong>Python:</strong> analysis starting from the raw data.</li>
+            <li><strong>Tableau dashboard:</strong> KPI tiles for GMV, units sold, views, listings, rating, and reviews; weekly GMV by merchant badge; top brands and products by GMV; GMV by price band; and filters for week, brand, merchant badge, price band, and merchant region.</li>
+          </ul>
+          <!-- TODO: which DAX measures Hugo wrote in Power BI -->
+        </section>
+
+        <section class="case-section" aria-labelledby="tools" data-reveal>
+          <h2 id="tools"><span>04</span>Tools</h2>
+          <dl class="tool-list">
+            <div><dt>Pentaho (PDI)</dt><dd>Ingestion, cleaning, and job orchestration (group)</dd></div>
+            <div><dt>MySQL</dt><dd>Staging, processed, and star-schema layers (group)</dd></div>
+            <div><dt>Power BI</dt><dd>Two-page report with DAX measures (group)</dd></div>
+            <div><dt>Python</dt><dd>Analysis from raw data (individual)</dd></div>
+            <div><dt>Tableau</dt><dd>Published dashboard (individual)</dd></div>
+          </dl>
+        </section>
+
+        <section class="case-section" aria-labelledby="result" data-reveal>
+          <h2 id="result"><span>05</span>Result</h2>
+          <ul class="stat-row" aria-label="Key figures from the Power BI report">
+            <li><strong>1.53M</strong><span>product views</span></li>
+            <li><strong>1.25%</strong><span>overall conversion rate</span></li>
+          </ul>
+          <ul>
+            <li><strong>High visibility, low conversion:</strong> many views turn into relatively few sales; the report points to product presentation, pricing, and promotions as ways to improve conversion.</li>
+            <li><strong>Mid-range demand:</strong> some Xiaomi Redmi models lead GMV.</li>
+            <li><strong>Location:</strong> merchants in Jakarta Pusat, Jakarta Utara, and Jakarta Barat contribute the most GMV.</li>
+            <li><strong>Merchant reputation:</strong> merchants with recognized platform badges contribute a significant share of GMV.</li>
+          </ul>
+          <!-- TODO: GMV and units-sold headline figures, once Hugo explains why the Power BI and Tableau totals differ -->
+        </section>
+
+        <section class="case-section" aria-labelledby="role" data-reveal>
+          <h2 id="role"><span>06</span>My Role</h2>
+          <div class="table-scroll">
+            <table class="role-table">
+              <caption class="visually-hidden">Individual and group contributions</caption>
+              <thead><tr><th scope="col">Part</th><th scope="col">Mode</th><th scope="col">Hugo's contribution</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">Python and Tableau analysis</th><td>Individual</td><td>All of it, from raw data</td></tr>
+                <tr><th scope="row">Pentaho → MySQL → Power BI pipeline</th><td>Group of four</td><td>Hands-on work within the group<!-- TODO: exact pipeline tasks and DAX measures Hugo did --></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="case-section" aria-labelledby="links" data-reveal>
+          <h2 id="links"><span>07</span>Links</h2>
+          <ul class="actions">
+            <li><a class="button button--primary" href="https://public.tableau.com/app/profile/hugo.pratama/viz/UAS_Marketplace_Smartphone_Indo/MainDashboard" target="_blank" rel="noopener noreferrer">View Tableau dashboard <span aria-hidden="true">↗</span><span class="visually-hidden"> (opens in a new tab)</span></a></li>
+            <li><a class="button" href="https://app.powerbi.com/view?r=eyJrIjoiOTQxYTc5MTAtMjQyYS00ZjBhLTk5OTYtZTM2ZWFjMzhlNjdiIiwidCI6IjM0ODViOTYzLTgyYmEtNGE2Zi04MTBmLWI1Y2MyMjZmZjg5OCIsImMiOjEwfQ%3D%3D" target="_blank" rel="noopener noreferrer">View Power BI report <span aria-hidden="true">↗</span><span class="visually-hidden"> (opens in a new tab)</span></a></li>
+          </ul>
+          <!-- TODO: notebook link -->
+        </section>
+      </article>
+
+      <nav class="pager" aria-label="More case studies">
+        <a class="next card" href="icoris-2026-paper.html"><small>Next case study</small>ICORIS 2026 Research Paper</a>
+      </nav>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>© 2026 Hugo Wahyu Bagas Putra Pratama</p>
+      <ul>
+        <li><a href="../index.html#projects">Projects</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../index.html#contact">Contact</a></li>
+        <li><a href="mailto:hugobagas0104@gmail.com">Email</a></li>
+        <li><a href="https://www.linkedin.com/in/hugo-wahyu-bagas-putra-p-716778326" target="_blank" rel="noopener noreferrer">LinkedIn<span class="visually-hidden"> (opens in a new tab)</span></a></li>
+      </ul>
+    </div>
+  </footer>
+</body>
+</html>

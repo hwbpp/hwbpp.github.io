@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ICORIS 2026 Research Paper · Hugo Wahyu Bagas Putra Pratama</title>
+  <meta name="description" content="ICORIS 2026 paper by Hugo Wahyu Bagas Putra Pratama (first author): a benchmark of how five types of data corruption affect accuracy, calibration, and feature-importance stability, with a proposed robustness score, AUDC.">
+  <meta name="theme-color" content="#0b1220">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Hugo Wahyu Bagas Putra Pratama">
+  <meta property="og:title" content="ICORIS 2026 Research Paper">
+  <meta property="og:description" content="ICORIS 2026 paper by Hugo Wahyu Bagas Putra Pratama (first author): a benchmark of how five types of data corruption affect accuracy, calibration, and feature-importance stability, with a proposed robustness score, AUDC.">
+  <!-- TODO: og:url and og:image once the domain and a preview image exist -->
+  <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap">
+  <link rel="stylesheet" href="../assets/css/main.css">
+  <script>(function(d){d.classList.add("js-nav");if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.classList.add("js-motion");})(document.documentElement);</script>
+  <script src="../assets/js/main.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap nav-bar">
+      <!-- TODO: Hugo to confirm the header short form "Hugo W. B. P. Pratama" -->
+      <a class="wordmark" href="../index.html">Hugo W. B. P. Pratama</a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-menu">
+        <span class="visually-hidden">Menu</span><span class="bar"></span><span class="bar"></span><span class="bar"></span>
+      </button>
+      <nav id="site-menu" class="site-nav" aria-label="Primary">
+        <ul>
+          <li><a href="../index.html#projects">Projects</a></li>
+          <li><a href="../index.html#experience">Experience</a></li>
+          <li><a href="../about.html">About</a></li>
+          <li><a href="../index.html#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="wrap">
+      <header class="page-head">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <ol>
+            <li><a href="../index.html#projects">Projects</a></li>
+            <li aria-current="page">ICORIS 2026 Research Paper</li>
+          </ol>
+        </nav>
+        <p class="eyebrow">ICORIS 2026 research paper</p>
+        <h1>Quantifying Data Quality Sensitivity in Tabular Machine Learning Pipelines</h1>
+        <p class="lead">A benchmark of how dirty tabular data affects machine learning models: not only accuracy, but also how trustworthy their probabilities and feature rankings stay. It proposes a single robustness score, AUDC.</p>
+        <dl class="meta-strip card">
+          <div><dt>Status</dt><dd><span class="status status--neutral">In the publication process</span></dd></div>
+          <div><dt>Venue</dt><dd>ICORIS 2026</dd></div>
+          <div><dt>Authorship</dt><dd>First author, two co-authors</dd></div>
+          <div><dt>Scope</dt><dd>4 models · 5 corruption types · 5 severity levels · 2 datasets</dd></div>
+        </dl>
+        <div class="case-visual frame frame--shot frame--large frame--paper">
+          <div class="frame-bar" aria-hidden="true"><i></i><i></i><i></i><span>icoris-2026-paper.pdf · page 1</span></div>
+          <img src="../assets/images/icoris-paper-page1.jpg" width="1200" height="686" alt="First page of the paper: title, the three authors with Hugo Wahyu Bagas Putra Pratama as first author, and the start of the abstract.">
+        </div>
+      </header>
+
+      <article class="case" aria-label="Paper summary">
+        <section class="case-section" aria-labelledby="problem" data-reveal>
+          <h2 id="problem"><span>01</span>Problem</h2>
+          <p>Real-world tabular data is rarely clean: missing values, noise, outliers, mislabeled rows, and duplicates are common. Most robustness studies only report accuracy.</p>
+          <p>Decisions such as fraud detection or diagnosis also need <strong>calibrated probabilities</strong> (a model that says 80% should be right about 80% of the time) and <strong>stable feature importance</strong> for audits. There was no single benchmark value for how corruption affects all three.</p>
+        </section>
+
+        <section class="case-section" aria-labelledby="context" data-reveal>
+          <h2 id="context"><span>02</span>Data / Context</h2>
+          <p>Two public datasets from the UCI Machine Learning Repository, chosen from different domains so the patterns are not specific to one problem:</p>
+          <ul>
+            <li><strong>Adult Income</strong> (census): predict whether a person earns more than $50,000 a year. Mixed continuous and discrete attributes, with an imbalanced target. <a href="https://doi.org/10.24432/C5GP7S" target="_blank" rel="noopener noreferrer">DOI 10.24432/C5GP7S<span class="visually-hidden"> (opens in a new tab)</span></a></li>
+            <li><strong>Breast Cancer Wisconsin (Diagnostic)</strong>: classify tumours as malignant from features computed on images of cell nuclei. All continuous, small, and fairly clean. <a href="https://doi.org/10.24432/C5DW2B" target="_blank" rel="noopener noreferrer">DOI 10.24432/C5DW2B<span class="visually-hidden"> (opens in a new tab)</span></a></li>
+          </ul>
+          <ul class="tags" aria-label="Paper keywords">
+            <li>Machine learning</li><li>Data quality</li><li>Tabular data</li><li>Robustness</li><li>Calibration</li><li>Feature importance</li><li>AUDC</li>
+          </ul>
+        </section>
+
+        <section class="case-section" aria-labelledby="approach" data-reveal>
+          <h2 id="approach"><span>03</span>Approach</h2>
+          <ol class="flow flow--5" aria-label="Experiment pipeline">
+            <li><strong>Corrupt</strong><span>5 types at 0–30% severity</span></li>
+            <li><strong>Train</strong><span>4 classifiers, 3 scenarios</span></li>
+            <li><strong>Measure</strong><span>5 metrics vs. clean baseline</span></li>
+            <li><strong>Summarize</strong><span>One AUDC score</span></li>
+            <li><strong>Test</strong><span>Friedman + Wilcoxon</span></li>
+          </ol>
+          <ul>
+            <li><strong>Corruption:</strong> missing values, Gaussian noise, outliers, label noise, and duplicate rows, each at 0%, 5%, 10%, 20%, and 30%.</li>
+            <li><strong>Scenarios:</strong> corruption in training data only, test data only, or both. Applied after an 80:20 stratified split, with preprocessing fitted on training data only to avoid leakage.</li>
+            <li><strong>Metrics:</strong> Accuracy and AUC (prediction), Brier score and Expected Calibration Error (calibration), and Spearman correlation between clean and corrupted feature-importance rankings (stability).</li>
+            <li><strong>AUDC:</strong> the relative degradation from the clean baseline at each severity level, integrated over the whole range and normalized. One number per setting; lower means more robust.</li>
+            <li><strong>Statistics:</strong> five random seeds; Friedman tests across 30 matched blocks per metric, Wilcoxon signed-rank post-hoc tests with Holm correction, and Kendall's W as effect size.</li>
+          </ul>
+        </section>
+
+        <section class="case-section" aria-labelledby="tools" data-reveal>
+          <h2 id="tools"><span>04</span>Tools</h2>
+          <dl class="tool-list">
+            <div><dt>Models</dt><dd>Logistic Regression, Random Forest, XGBoost, Multi-layer Perceptron</dd></div>
+            <div><dt>Metrics</dt><dd>Accuracy, AUC, Brier score, ECE, Spearman rank correlation, AUDC (proposed)</dd></div>
+            <div><dt>Statistics</dt><dd>Friedman test, Wilcoxon signed-rank test, Holm correction, Kendall's W</dd></div>
+          </dl>
+          <!-- TODO: software libraries used (not named in the paper) -->
+        </section>
+
+        <section class="case-section" aria-labelledby="result" data-reveal>
+          <h2 id="result"><span>05</span>Result</h2>
+          <ul>
+            <li><strong>Label noise did the most damage</strong> (average AUDC 1.0741), followed by outliers (0.9085). Gaussian noise and duplicates had very small effects at the tested levels.</li>
+            <li><strong>Random Forest was the most robust</strong> (0.2132); Logistic Regression was the most sensitive (0.6668).</li>
+            <li><strong>Accuracy alone hides the damage:</strong> calibration error and feature-importance stability often degraded more than accuracy. Model differences were statistically significant for AUC, ECE, and feature-importance stability, but not for accuracy or Brier score.</li>
+          </ul>
+          <div class="chart-grid">
+            <figure class="chart card">
+            <figcaption id="chart-types"><strong>Average AUDC by corruption type</strong><span>Averaged over models, metrics, and scenarios. Higher = more damage.</span></figcaption>
+            <table class="bar-table" aria-labelledby="chart-types">
+              <thead class="visually-hidden"><tr><th scope="col">Category</th><th scope="col">Bar</th><th scope="col">Average AUDC</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">Label noise</th><td class="bar-cell"><span class="bar" style="--v: 97.65%"></span></td><td class="bar-value">1.0741</td></tr>
+                <tr><th scope="row">Outliers</th><td class="bar-cell"><span class="bar" style="--v: 82.59%"></span></td><td class="bar-value">0.9085</td></tr>
+                <tr><th scope="row">Missing values</th><td class="bar-cell"><span class="bar" style="--v: 17.04%"></span></td><td class="bar-value">0.1874</td></tr>
+                <tr><th scope="row">Gaussian noise</th><td class="bar-cell"><span class="bar" style="--v: 1.07%"></span></td><td class="bar-value">0.0118</td></tr>
+                <tr><th scope="row">Duplicates</th><td class="bar-cell"><span class="bar" style="--v: 0.55%"></span></td><td class="bar-value">0.0061</td></tr>
+              </tbody>
+            </table>
+          </figure>
+            <figure class="chart card">
+            <figcaption id="chart-models"><strong>Average AUDC by model</strong><span>Averaged over corruption types, metrics, and scenarios. Lower = more robust.</span></figcaption>
+            <table class="bar-table" aria-labelledby="chart-models">
+              <thead class="visually-hidden"><tr><th scope="col">Category</th><th scope="col">Bar</th><th scope="col">Average AUDC</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">Logistic Regression</th><td class="bar-cell"><span class="bar" style="--v: 60.62%"></span></td><td class="bar-value">0.6668</td></tr>
+                <tr><th scope="row">MLP</th><td class="bar-cell"><span class="bar" style="--v: 40.85%"></span></td><td class="bar-value">0.4494</td></tr>
+                <tr><th scope="row">XGBoost</th><td class="bar-cell"><span class="bar" style="--v: 38.25%"></span></td><td class="bar-value">0.4208</td></tr>
+                <tr><th scope="row">Random Forest</th><td class="bar-cell"><span class="bar" style="--v: 19.38%"></span></td><td class="bar-value">0.2132</td></tr>
+              </tbody>
+            </table>
+          </figure>
+          </div>
+          <p class="note">Limitations noted in the paper: two benchmark datasets, synthetic random corruption, and binary classification only. The Random Forest result is not a general recommendation.</p>
+        </section>
+
+        <section class="case-section" aria-labelledby="role" data-reveal>
+          <h2 id="role"><span>06</span>My Role</h2>
+          <p>First author. Designed the research framework, implemented the data corruption pipeline, ran all experiments, and wrote the manuscript.</p>
+          <p>The two co-authors, lecturers from the research course, contributed to the research topic, methodology design, and implementation guidance, and provided review and academic supervision.</p>
+        </section>
+        <!-- Links section omitted until the paper is published -->
+        <!-- TODO: paper link or DOI after publication. The local PDF is not linked: it is unpublished and contains authors' email addresses (privacy rule). -->
+      </article>
+
+      <nav class="pager" aria-label="More case studies">
+        <a class="prev card" href="marketplace-data-ecosystem.html"><small>Previous case study</small>Marketplace Data Ecosystem</a>
+        <a class="next card" href="crypto-market-analyzer.html"><small>Next case study</small>Crypto Market Analyzer</a>
+      </nav>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>© 2026 Hugo Wahyu Bagas Putra Pratama</p>
+      <ul>
+        <li><a href="../index.html#projects">Projects</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../index.html#contact">Contact</a></li>
+        <li><a href="mailto:hugobagas0104@gmail.com">Email</a></li>
+        <li><a href="https://www.linkedin.com/in/hugo-wahyu-bagas-putra-p-716778326" target="_blank" rel="noopener noreferrer">LinkedIn<span class="visually-hidden"> (opens in a new tab)</span></a></li>
+      </ul>
+    </div>
+  </footer>
+</body>
+</html>

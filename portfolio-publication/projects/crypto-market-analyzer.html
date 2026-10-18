@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Crypto Market Analyzer · Hugo Wahyu Bagas Putra Pratama</title>
+  <meta name="description" content="Personal data project by Hugo Wahyu Bagas Putra Pratama: public crypto market data collected, quality-checked, and turned into indicators, explainable scores, and dashboards. An analysis tool, not financial advice.">
+  <meta name="theme-color" content="#0b1220">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Hugo Wahyu Bagas Putra Pratama">
+  <meta property="og:title" content="Crypto Market Analyzer">
+  <meta property="og:description" content="Personal data project: public crypto market data collected, quality-checked, and turned into indicators, explainable scores, and dashboards.">
+  <!-- TODO: og:url and og:image once the domain and a preview image exist -->
+  <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap">
+  <link rel="stylesheet" href="../assets/css/main.css">
+  <script>(function(d){d.classList.add("js-nav");if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.classList.add("js-motion");})(document.documentElement);</script>
+  <script src="../assets/js/main.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap nav-bar">
+      <!-- TODO: Hugo to confirm the header short form "Hugo W. B. P. Pratama" -->
+      <a class="wordmark" href="../index.html">Hugo W. B. P. Pratama</a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-menu">
+        <span class="visually-hidden">Menu</span><span class="bar"></span><span class="bar"></span><span class="bar"></span>
+      </button>
+      <nav id="site-menu" class="site-nav" aria-label="Primary">
+        <ul>
+          <li><a href="../index.html#projects">Projects</a></li>
+          <li><a href="../index.html#experience">Experience</a></li>
+          <li><a href="../about.html">About</a></li>
+          <li><a href="../index.html#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="wrap">
+      <header class="page-head">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <ol>
+            <li><a href="../index.html#projects">Projects</a></li>
+            <li aria-current="page">Crypto Market Analyzer</li>
+          </ol>
+        </nav>
+        <p class="eyebrow">Data &amp; analytics · personal project</p>
+        <h1>Crypto Market Analyzer</h1>
+        <p class="lead">A personal analytical project that collects public crypto market data, checks its quality, and turns it into indicators, explainable scores, and visualizations to support day-to-day decisions. It is an analysis tool, not financial advice.</p>
+        <dl class="meta-strip card">
+          <div><dt>Status</dt><dd><span class="status status--dev">In development</span></dd></div>
+          <div><dt>Type</dt><dd>Personal project</dd></div>
+          <div><dt>Work mode</dt><dd>Individual</dd></div>
+          <div><dt>Stack</dt><dd>Python, pandas, FastAPI, SQLite, Streamlit</dd></div>
+        </dl>
+        <figure class="case-visual-wrap">
+          <div class="case-visual frame frame--shot frame--natural frame--large">
+            <div class="frame-bar" aria-hidden="true"><i></i><i></i><i></i><span>crypto-market-analyzer · indicators</span></div>
+            <img src="../assets/images/crypto-market-analyzer-indicators.jpg" width="1600" height="900" alt="Analysis view with a candlestick price chart overlaid with EMA 20, 50 and 200 lines and Bollinger Bands, a volume bar chart, a score breakdown by trend, momentum, volume, volatility and risk, and indicator panels for trend structure, RSI 14 and MACD.">
+          </div>
+          <figcaption class="case-visual-caption">Design prototype of the analysis view, shown with synthetic data.</figcaption>
+        </figure>
+      </header>
+
+      <article class="case" aria-label="Case study">
+        <section class="case-section" aria-labelledby="problem" data-reveal>
+          <h2 id="problem"><span>01</span>Problem</h2>
+          <p>Market data is easy to look at but hard to read consistently. The goal is to collect public data, check that it is complete before using it, and turn it into the same set of indicators and explanations every time, so each conclusion can be traced back to the data behind it.</p>
+          <p>The tool does not place orders, connect to any account, or predict prices.</p>
+        </section>
+
+        <section class="case-section" aria-labelledby="data" data-reveal>
+          <h2 id="data"><span>02</span>Data / Context</h2>
+          <p>Public market data from Binance (OHLCV candles) and Bybit (USDT perpetual contracts). Each candle is stored once per symbol, interval, and open time, so repeated downloads never create duplicates.</p>
+          <figure class="case-figure">
+            <div class="frame frame--shot frame--natural">
+              <div class="frame-bar" aria-hidden="true"><i></i><i></i><i></i><span>data health</span></div>
+              <img src="../assets/images/crypto-market-analyzer-data-health.jpg" width="1600" height="429" loading="lazy" alt="Data health table that checks each symbol for data presence, a full 500-candle history, gaps, closed candles, clock and identity. Four symbols pass and are marked eligible; one fails the history and gap checks and is withheld.">
+            </div>
+            <figcaption>Each symbol must pass a strict data gate before it is analysed. Prototype with synthetic data.</figcaption>
+          </figure>
+        </section>
+
+        <section class="case-section" aria-labelledby="approach" data-reveal>
+          <h2 id="approach"><span>03</span>Approach</h2>
+          <ol class="flow" aria-label="Data pipeline">
+            <li><strong>Public APIs</strong><span>Binance and Bybit candles</span></li>
+            <li><strong>Validate and store</strong><span>SQLite, no duplicates</span></li>
+            <li><strong>Analyse</strong><span>Indicators and scores</span></li>
+            <li><strong>Present</strong><span>FastAPI and dashboards</span></li>
+          </ol>
+          <p class="flow-caption">From raw candles to the dashboard.</p>
+          <ul>
+            <li><strong>Data quality first:</strong> a historical audit flags gaps, duplicates, and short histories, and symbols that fail are left out instead of guessed.</li>
+            <li><strong>Indicator engine:</strong> EMA 20/50/200, RSI 14, MACD, Bollinger Bands, ATR 14, and relative volume, computed with pandas. When history is too short, the value stays empty.</li>
+            <li><strong>Explainable score:</strong> a 0–100 rule-based score from five weighted components (trend, momentum, volume, volatility, risk), each with a written explanation.</li>
+            <li><strong>Risk check:</strong> a separate layer that flags plans which exceed small-account limits.</li>
+          </ul>
+        </section>
+
+        <section class="case-section" aria-labelledby="tools" data-reveal>
+          <h2 id="tools"><span>04</span>Tools</h2>
+          <dl class="tool-list">
+            <div><dt>Python</dt><dd>Ingestion, validation, and analysis</dd></div>
+            <div><dt>pandas, NumPy</dt><dd>Indicator calculations on stored candles</dd></div>
+            <div><dt>SQLite, SQLAlchemy</dt><dd>Candle storage with a uniqueness constraint</dd></div>
+            <div><dt>FastAPI</dt><dd>API for market data, analysis, and risk checks</dd></div>
+            <div><dt>Streamlit, Plotly</dt><dd>Dashboard and charts</dd></div>
+            <div><dt>JavaScript</dt><dd>Newer web interface</dd></div>
+            <div><dt>pytest</dt><dd>Automated tests for data and analysis logic</dd></div>
+          </dl>
+        </section>
+
+        <section class="case-section" aria-labelledby="result" data-reveal>
+          <h2 id="result"><span>05</span>Current progress</h2>
+          <p>Data ingestion, the data-quality audit, the indicator engine, scoring, and a Streamlit dashboard are working, with an automated test suite. Verification against live Bybit data and market-regime summaries are still in progress.</p>
+        </section>
+
+        <section class="case-section" aria-labelledby="role" data-reveal>
+          <h2 id="role"><span>06</span>My Role</h2>
+          <p>Individual project: designed, built, and tested by Hugo.</p>
+        </section>
+        <!-- Links section omitted: no public repository -->
+      </article>
+
+      <nav class="pager" aria-label="More case studies">
+        <a class="prev card" href="icoris-2026-paper.html"><small>Previous case study</small>ICORIS 2026 Research Paper</a>
+        <a class="next card" href="notaryflow.html"><small>Next case study</small>NotaryFlow</a>
+      </nav>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>© 2026 Hugo Wahyu Bagas Putra Pratama</p>
+      <ul>
+        <li><a href="../index.html#projects">Projects</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../index.html#contact">Contact</a></li>
+        <li><a href="mailto:hugobagas0104@gmail.com">Email</a></li>
+        <li><a href="https://www.linkedin.com/in/hugo-wahyu-bagas-putra-p-716778326" target="_blank" rel="noopener noreferrer">LinkedIn<span class="visually-hidden"> (opens in a new tab)</span></a></li>
+      </ul>
+    </div>
+  </footer>
+</body>
+</html>
